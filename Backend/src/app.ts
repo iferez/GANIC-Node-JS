@@ -4,7 +4,7 @@ import indexRouter from './routes/index.routes'
 import cors from 'cors'
 
 const app = express()
-const port: string | undefined = process.env.PORT
+const port: string | undefined = process.env.PORT ?? '3000'
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
