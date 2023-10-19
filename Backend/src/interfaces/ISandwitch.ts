@@ -1,9 +1,9 @@
 export interface ISandwich {
   id: number
-  Nombre: string
-  Descripcion: string
-  Clasificacion: string
-  Precio: number
+  nombre: string
+  descripcion: string
+  clasificacion: string
+  precio: number
 }
 
 export type SandwichInput = Omit<ISandwich, 'id'>

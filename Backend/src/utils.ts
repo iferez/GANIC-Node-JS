@@ -19,6 +19,7 @@ const parseDescripcion = (desc: any): string => {
   if (!isString(desc)) {
     throw new Error('La Descripcion no es un string')
   }
+
   return desc
 }
 
@@ -38,10 +39,10 @@ const parsePrecio = (precio: any): number => {
 
 const validarEntrada = (object: any): SandwichInput => {
   const nuevoSandwich: SandwichInput = {
-    Nombre: parseNombre(object.Nombre),
-    Descripcion: parseDescripcion(object.Descripcion),
-    Clasificacion: parseClasificicacion(object.Clasificacion),
-    Precio: parsePrecio(object.Precio)
+    nombre: parseNombre(object.nombre),
+    descripcion: parseDescripcion(object.descripcion),
+    clasificacion: parseClasificicacion(object.clasificacion),
+    precio: parsePrecio(object.precio)
   }
   return nuevoSandwich
 }

@@ -1,23 +1,37 @@
 import { Request, Response } from 'express'
-import * as sandwichService from '../services/sandwich'
+import * as sService from '../services/sandwich.service'
 import validarEntrada from '../utils'
 
-const obtenerSandwitch = (_req: Request, res: Response): Response => {
-  return res.send(sandwichService.obtenerSandwich())
-}
-
-const agregarSandwitch = (req: Request, res: Response): Response => {
+const obtenerSandwich = async function (_req: Request, res: Response): Promise<void> {
   try {
-    const sandwich = sandwichService.agregarSandwich(validarEntrada(req.body))
-    return res.status(201).send(sandwich)
-  } catch (error: any) {
-    return res.status(400).send(error.message)
+    const sandwiches = await sService.obtenerTodosLosSandwiches()
+    res.status(200).json(sandwiches)
+  } catch (error) {
+    res.status(500).json({ error: 'Error interno del servidor' })
+  }
+}
+const obtenerSandwichPorId = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id = Number(req.params.id)
+    const sandwich = await sService.obtenerPorId(id)
+    if (sandwich != null) {
+      res.status(200).json(sandwich)
+    } else {
+      res.status(404).json({ error: 'Sándwich no encontrado' })
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Error interno del servidor' })
   }
 }
 
-const obtenerSandwichPorId = (req: Request, res: Response): Response => {
-  const sandwich = sandwichService.obtenerSandwichPorId(Number(req.params.id))
-  return sandwich != null ? res.send(sandwich) : res.status(404).send('Sandwich no encontrado')
+const agregarSandwich = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    await sService.agregarSandwich(validarEntrada(req.body))
+    return res.status(201).json(req.body)
+  } catch (error: any) {
+    console.log(error)
+    return res.status(404).json({ error: error.message })
+  }
 }
 
-export { obtenerSandwitch, agregarSandwitch, obtenerSandwichPorId }
+export { obtenerSandwich, agregarSandwich, obtenerSandwichPorId }
