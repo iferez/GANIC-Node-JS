@@ -1,44 +1,50 @@
 [
     {
-        "id": 1,
-        "Nombre": "Sandwich de Pollo",
-        "Descripcion": "Delicioso sandwich de pollo a la parrilla con lechuga y tomate.",
-        "Clasificacion": "Pollo",
-        "Precio": 5.99
+      "id": 1,
+      "nombre": "Sandwich de Pollo",
+      "descripcion": "Delicioso sandwich de pollo a la parrilla con lechuga y tomate.",
+      "clasificacion": "Sin_Restriccion",
+      "imagen": "sandwitch1",
+      "precio": 5.99
     },
     {
-        "id": 2,
-        "Nombre": "Sandwich de Tofu",
-        "Descripcion": "Sandwich vegetariano con tofu, espinacas y aderezo de tahini.",
-        "Clasificacion": "Vegetariano",
-        "Precio": 6.49
+      "id": 2,
+      "nombre": "Sandwich de Tofu",
+      "descripcion": "Sandwich vegetariano con tofu, espinacas y aderezo de tahini.",
+      "clasificacion": "Vegano",
+      "imagen": "sandwitch2",
+      "precio": 6.49
     },
     {
-        "id": 3,
-        "Nombre": "Sandwich de Carne Asada",
-        "Descripcion": "Sabroso sandwich de carne asada con cebolla y jalapeños.",
-        "Clasificacion": "Carne",
-        "Precio": 7.99
+      "id": 3,
+      "nombre": "Sandwich de Carne Asada",
+      "descripcion": "Sabroso sandwich de carne asada con cebolla y jalapeños.",
+      "clasificacion": "Sin_Restriccion",
+      "imagen": "sandwitch3",
+      "precio": 7.99
     },
     {
-        "id": 4,
-        "Nombre": "Sandwich de Pavo",
-        "Descripcion": "Clásico sandwich de pavo con mayonesa y mostaza.",
-        "Clasificacion": "Pavo",
-        "Precio": 6.99
+      "id": 4,
+      "nombre": "Sandwich de Pavo",
+      "descripcion": "Clásico sandwich de pavo con mayonesa y mostaza.",
+      "clasificacion": "Sin_Restriccion",
+      "imagen": "sandwitch4",
+      "precio": 6.99
     },
     {
-        "id": 5,
-        "Nombre": "Sandwich de Atún",
-        "Descripcion": "Sandwich de atún fresco con pepinillos y cebolla morada.",
-        "Clasificacion": "Pescado",
-        "Precio": 7.49
+      "id": 5,
+      "nombre": "Sandwich de Atún",
+      "descripcion": "Sandwich de atún fresco con pepinillos y cebolla morada.",
+      "clasificacion": "Sin_Restriccion",
+      "imagen": "sandwitch5",
+      "precio": 7.49
     },
     {
-        "id": 6,
-        "Nombre": "Sandwich de Jamón y Queso",
-        "Descripcion": "Sandwich clásico con jamón y queso suizo derretido.",
-        "Clasificacion": "Jamón",
-        "Precio": 5.49
+      "id": 6,
+      "nombre": "Sandwich de Jamón y Queso",
+      "descripcion": "Sandwich clásico con jamón y queso suizo derretido.",
+      "clasificacion": "Sin_Restriccion",
+      "imagen": "sandwitch6",
+      "precio": 5.49
     }
-]
+  ]

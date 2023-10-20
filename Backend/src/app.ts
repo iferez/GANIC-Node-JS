@@ -10,6 +10,6 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(cors({ origin: '*' }))
 
-app.use('/', indexRouter)
+app.use('/api', indexRouter)
 
 app.listen(port, () => { console.log(`Server is listening on port $ ${port}`) })
