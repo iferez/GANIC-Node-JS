@@ -17,11 +17,11 @@ export class SandwitchService {
     this.myApiUrl = 'api/sandwich/';
    }
 
-   getSandwitchesPreferencia(preferencia: string): Observable<IProducto[]> {
+  getSandwitchesPreferencia(preferencia: string): Observable<IProducto[]> {
       return this.http.post<IProducto[]>(`${this.myAppUrl}${this.myApiUrl}obtenerSandwitchPorClasificacion`, { "clasificacion": preferencia}, { headers: { 'Content-Type': 'application/json' }});
-    }
+  }
 
-    getSandwitches(): Observable<IProducto[]> {
-      return this.http.get<IProducto[]>(`${this.myAppUrl}${this.myApiUrl}listarSandwitch`);
-    }
+  getSandwitches(): Observable<IProducto[]> {
+    return this.http.get<IProducto[]>(`${this.myAppUrl}${this.myApiUrl}listarSandwitch`);
+  }
 }

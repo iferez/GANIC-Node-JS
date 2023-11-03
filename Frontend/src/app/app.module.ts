@@ -16,6 +16,8 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { SliderComponent } from './components/slider/slider.component';
+import { VerificarCodigoComponent } from './components/verificar-codigo/verificar-codigo.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { SliderComponent } from './components/slider/slider.component';
     HomeComponent,
     LoginComponent,
     RegistroComponent,
-    SliderComponent
+    SliderComponent,
+    VerificarCodigoComponent,
   ],
   imports: [
     BrowserModule,

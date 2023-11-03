@@ -12,4 +12,9 @@ export class AuthService {
     console.log(localStorage.getItem('token'));
     return localStorage.getItem('token') ? of(true) : of(false);
   }
+
+  deslogar(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+  }
 }

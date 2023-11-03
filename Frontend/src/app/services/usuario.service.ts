@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { IUsuarioLogin, IUsuarioRegistro } from '../interfaces/usuario';
+import { IUsuario, IUsuarioLogin } from '../interfaces/usuario';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -18,12 +18,16 @@ export class UsuarioService {
     this.myApiUrl = 'api/usuarios/';
   }
 
-  crearUsuario(usuario: IUsuarioRegistro): Observable<any> {
+  crearUsuario(usuario: IUsuario): Observable<any> {
     return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}crearUsuario`, usuario);
   }
 
   login(usuario: IUsuarioLogin): Observable<any> {
     return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}logear`, usuario);
+  }
+
+  verificarCodigo(datos: any): Observable<any> {
+    return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}verificarUsuario`, datos);
   }
 
   isLogged(): boolean {

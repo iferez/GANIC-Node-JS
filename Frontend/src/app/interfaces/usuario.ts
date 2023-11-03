@@ -7,13 +7,4 @@ export interface IUsuario{
     direccion: string;
 }
 
-export interface IUsuarioLogin{
-    username: string;
-    password: string;
-}
-
-export interface IUsuarioRegistro{
-    username: string;
-    password: string;
-    email: string;
-}
+export type IUsuarioLogin = Omit<IUsuario, 'id' | 'nombre' | 'apellido' | 'direccion' | 'username'>;

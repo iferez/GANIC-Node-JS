@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { IUsuarioRegistro } from 'src/app/interfaces/usuario';
+import { IUsuario } from 'src/app/interfaces/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -12,7 +12,6 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class RegistroComponent implements OnInit{
   
-  loading: boolean = false;
   form: FormGroup;
 
   constructor( private fb: FormBuilder, 
@@ -24,6 +23,9 @@ export class RegistroComponent implements OnInit{
         user: ['', [Validators.required, Validators.minLength(3)]],
         pass: ['', [Validators.required, Validators.minLength(6)]],
         rePass: ['', [Validators.required, Validators.minLength(6)]],
+        nombre: ['', [Validators.required, Validators.minLength(3)]],
+        apellido: ['', [Validators.required, Validators.minLength(3)]],
+        direccion: ['', [Validators.required, Validators.minLength(3)]],
      },
      {
         validators: (form: FormGroup) => {
@@ -38,19 +40,30 @@ export class RegistroComponent implements OnInit{
   }
   
   registrarUsuario(){
-    console.log(this.form);
-    const nuevoUsuario: IUsuarioRegistro = {
+    console.log('DATOS OBTENIDOS DEL FORM ==> ',this.form);
+    const nuevoUsuario: IUsuario = {
       email: this.form.get('email')?.value,
       username: this.form.get('user')?.value,
-      password: this.form.get('pass')?.value
+      password: this.form.get('pass')?.value,
+      nombre: this.form.get('nombre')?.value,
+      apellido: this.form.get('apellido')?.value,
+      direccion: this.form.get('direccion')?.value,
     }
-    this._usuarioService.crearUsuario(nuevoUsuario).subscribe(data => {
-      console.log(data);
-      this.Toast.success('Usuario creado correctamente', 'Usuario creado');
-      this.router.navigate(['/login']);
-    }, (error: any) => {
-      console.log(error);
-      this.Toast.error('Error al crear el usuario', 'Error');
+    this._usuarioService.crearUsuario(nuevoUsuario).subscribe({
+      next: (data) =>{
+        this.Toast.success('Usuario creado correctamente', 'Usuario creado');
+        localStorage.setItem('email', nuevoUsuario.email);
+        setTimeout(() => {
+          this.router.navigate(['/verificarCodigo']);
+        }, 2000);
+      },
+      error: (error) =>{
+        console.log(error);
+        this.Toast.error('Error al crear el usuario', 'Error');
+      },
+      complete: () =>{
+        console.log('Peticion completa');
+      }
     });
     this.form.reset();
   }
