@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
               private _usuarioService: UsuarioService,
               private router: Router) { 
     this.form = this.fb.group({
-      user: ['', [Validators.required,Validators.maxLength(10),Validators.minLength(3)]],
-      pass: ['', [Validators.required,Validators.maxLength(10),Validators.minLength(3)]]
+      email: ['', [Validators.required, Validators.email]],
+      pass: ['', [Validators.required,Validators.maxLength(8),Validators.minLength(8)]]
     });
   }
 
@@ -30,18 +30,25 @@ export class LoginComponent implements OnInit {
 
   iniciarSecion(){
     const usuario: IUsuarioLogin = {
-      username: this.form.get('user')?.value,
+      email: this.form.get('email')?.value,
       password: this.form.get('pass')?.value
     }
     console.log(usuario);
-    this._usuarioService.login(usuario).subscribe(data => {
-      this.Toastr.success('Validacion correcta', 'Validacion correcta');
-      setTimeout(() => {
-        localStorage.setItem('token', "1");
-        this.router.navigate(['/home']);
-      }, 3000);
-    }, error => {
-      this.Toastr.error('Usuario o contraseña incorrectos', 'Error');
+    this._usuarioService.login(usuario).subscribe({
+      next: (data) =>{
+        this.Toastr.success('Validacion correcta', 'Validacion correcta');
+        setTimeout(() => {
+          localStorage.setItem('token', data.token);
+          this.router.navigate(['/home']);
+        }, 3000);
+      },
+      error: (error) =>{
+        console.log(error);
+        this.Toastr.error('Usuario o contraseña incorrectos', 'Error');
+      },
+      complete: () =>{
+        console.log('Peticion completada');
+      }
     });
     this.form.reset();
   }

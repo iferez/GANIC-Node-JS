@@ -1,0 +1,25 @@
+<div class="container">
+    <div id="loginbox">
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5" style="background-color: #f7f7f7; padding: 46px;">
+                <form [formGroup]="form" (ngSubmit)="verificarCodigo()">
+                    <h3>Verifica el código</h3>
+                    <hr class="mb-4">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text">
+                            <i class="bi bi-123" [class.green-icon]="this.form.get('codigo')?.valid"
+                                [class.red-icon]="this.form.get('codigo')?.invalid && this.form.get('codigo')?.touched"></i>
+                        </span>
+                        <input formControlName="codigo" type="text" class="form-control" maxlength="6" minlength="6"
+                            placeholder="Ingrese codigo" />
+                    </div>
+                    <div class="d-grid">
+                        <button [disabled]="this.form.invalid" class="btn btn-success mt-3 mb-4"
+                            type="Submit">Verificar</button>
+                        <a routerLink="/home" class="btn btn-primary">Home</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

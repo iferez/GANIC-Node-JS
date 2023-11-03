@@ -5,6 +5,7 @@ import { UsuarioService } from './services/usuario.service';
 import { authGuard } from './guards/auth.guard';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { VerificarCodigoComponent } from './components/verificar-codigo/verificar-codigo.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full"},
@@ -19,7 +20,10 @@ const routes: Routes = [
   },
   { path: "crearPedido",
     canActivate: [authGuard],
-    component: LoginComponent
+    component: HomeComponent
+  },
+  { path: "verificarCodigo",
+    component: VerificarCodigoComponent
   },
   { path: "**", redirectTo: "home", pathMatch: "full"}
 ];

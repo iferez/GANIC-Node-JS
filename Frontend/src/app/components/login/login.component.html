@@ -8,10 +8,10 @@
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
                             <i class="bi bi-person-circle"
-                            [class.green-icon]="this.form.get('user')?.valid"
-                            [class.red-icon]="this.form.get('user')?.invalid && this.form.get('user')?.touched"></i>
+                            [class.green-icon]="this.form.get('email')?.valid"
+                            [class.red-icon]="this.form.get('email')?.invalid && this.form.get('email')?.touched"></i>
                         </span>
-                        <input formControlName="user" type="text" class="form-control" placeholder="Ingrese usuario"/>
+                        <input formControlName="email" type="text" class="form-control" placeholder="Ingrese email"/>
                     </div>
                     <div class="input-group input-group-lg">
                         <span class="input-group-text">
