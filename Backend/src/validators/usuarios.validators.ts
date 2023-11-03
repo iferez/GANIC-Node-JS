@@ -41,7 +41,7 @@ const agregarUsuarioSchema = z.object({
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, 'El password debe tener al menos una mayúscula, una minúscula y un número'),
   direccion: z.string()
     .max(50, 'La dirección no puede tener más de 50 caracteres')
-    .min(8, 'La dirección debe tener al menos 8 caracteres'),
+    .min(3, 'La dirección debe tener al menos 3 caracteres'),
   username: z.string()
     .min(3, 'El username debe tener al menos 3 caracteres')
     .max(10, 'El username no puede tener más de 10 caracteres')

@@ -23,7 +23,7 @@ export class UsuarioService {
   }
 
   login(usuario: IUsuarioLogin): Observable<any> {
-    return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}logear`, usuario);
+    return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}logearUsuario`, usuario);
   }
 
   verificarCodigo(datos: any): Observable<any> {
