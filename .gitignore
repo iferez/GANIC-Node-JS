@@ -1,1 +1,8 @@
-.idea
+.idea/
+.angular
+/Frontend/.angular
+/Frontend/node_modules
+/Frontend/.idea
+/Backend/.idea
+/Backend/node_modules
+
