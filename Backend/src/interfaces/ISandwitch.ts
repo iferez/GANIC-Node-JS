@@ -3,7 +3,7 @@ export interface ISandwich {
   nombre: string
   descripcion: string
   clasificacion: string
-  imagen: string
+  imagen?: string
   precio: number
 }
 

@@ -15,32 +15,24 @@ const obtenerSandwich = (_req: Request, res: Response): Promise<Response> => {
 }
 
 const agregarSandwich = (req: Request, res: Response): Promise<Response> => {
-  console.log(req)
-  console.log(req.file)
-  return validacionSandwich.agregarSandwitchSchema.parseAsync(req.body)
-    .then((datosValidos) => {
-      console.log(req.file)
-      const imagen = req.file
-      if (imagen !== undefined && imagen !== null) {
-        const nuevoSandwich: SandwichInput = {
-          nombre: datosValidos.nombre,
-          precio: datosValidos.precio,
-          descripcion: datosValidos.descripcion,
-          clasificacion: datosValidos.clasificacion,
-          imagen: imagen.filename
-        }
-        return sandwichService.agregarSandwich(nuevoSandwich)
-          .then(() => res.status(201).json(req.body))
-          .catch((error) => {
-            return res.status(500).json({ error: error.message })
-          })
-      } else {
-        return res.status(400).json({ error: 'No se ha proporcionado una imagen' })
-      }
-    })
-    .catch((error) => {
-      return res.status(400).json({ error: error.message })
-    })
+  const datosValidos = validacionSandwich.agregarSandwitchSchema.parseAsync(req.body)
+  return datosValidos.then((datos) => {
+    const imagen = req.file
+    if (imagen === undefined || imagen === null) {
+      return res.status(400).json({ error: 'No se envio una imágen' })
+    }
+    const nuevoSandwich: SandwichInput = {
+      nombre: datos.nombre,
+      precio: parseInt(datos.precio),
+      descripcion: datos.descripcion,
+      clasificacion: datos.clasificacion,
+      imagen: imagen.filename
+    }
+    return sandwichService.agregarSandwich(nuevoSandwich)
+      .then(() => res.status(201).json({ mensaje: 'Sándwich agregado correctamente' }))
+  }).catch((error) => {
+    return res.status(500).json({ error: error.message })
+  })
 }
 
 const obtenerSandwichPorId = (req: Request, res: Response): Promise<Response> => {

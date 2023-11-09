@@ -15,10 +15,8 @@ const obtenerListadoSandwichPorClasificacionSchema = z.object({
 const agregarSandwitchSchema = z.object({
   nombre: z.string()
     .min(3)
-    .max(30),
-  precio: z.number()
-    .int()
-    .positive(),
+    .max(100),
+  precio: z.string(),
   descripcion: z.string()
     .min(10)
     .max(100),
