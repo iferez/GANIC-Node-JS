@@ -1,51 +1,62 @@
+/* eslint-disable @typescript-eslint/promise-function-async */
 import { ISandwich, SandwichInput } from '../interfaces/ISandwitch'
 import SandwichModel from '../models/sandwich.model'
 
-const obtenerTodosLosSandwiches = async (): Promise<ISandwich[]> => {
-  return await SandwichModel.sync()
-    .then(async () => {
-      return await SandwichModel.findAll({})
-    })
-    .then((sandwiches) => {
-      return sandwiches.map((el) => el.get({ plain: true }))
-    })
-    .catch((error) => {
-      console.log(error)
-      throw error
-    })
+const obtenerTodosLosSandwiches = (): Promise<ISandwich[]> => {
+  return new Promise<ISandwich[]>((resolve, reject) => {
+    SandwichModel.findAll({})
+      .then((sandwiches) => {
+        resolve(sandwiches.map((el) => el.get({ plain: true })))
+      })
+      .catch((error) => {
+        console.log(error)
+        reject(error)
+      })
+  })
 }
 
-const agregarSandwich = async (sandwitchInput: SandwichInput): Promise<ISandwich> => {
-  return await SandwichModel.create(sandwitchInput)
-    .then(sandwich => {
-      return sandwich.get({ plain: true })
-    })
-    .catch(error => {
-      console.log(error)
-      if (error.name === 'SequelizeUniqueConstraintError') {
-        throw new Error('El sandwich ya existe')
-      } else {
-        throw new Error('No se pudo agregar el sandwich')
-      }
-    })
+const agregarSandwich = (sandwitchInput: SandwichInput): Promise<ISandwich> => {
+  return new Promise<ISandwich>((resolve, reject) => {
+    SandwichModel.create(sandwitchInput)
+      .then((sandwich) => {
+        resolve(sandwich.get({ plain: true }))
+      })
+      .catch((error) => {
+        if (error.name === 'SequelizeUniqueConstraintError') {
+          reject(new Error('El sandwich ya existe'))
+        } else {
+          reject(new Error('No se pudo agregar el sandwich'))
+        }
+      })
+  })
 }
 
-const obtenerPorId = async (id: number): Promise<ISandwich> => {
-  const sandwich = await SandwichModel.findByPk(id)
-  if (sandwich === null) {
-    throw new Error('El sandwich no fue encontrado')
-  }
-  return sandwich.get({ plain: true })
+const obtenerPorId = (id: number): Promise<ISandwich> => {
+  return new Promise<ISandwich>((resolve, reject) => {
+    SandwichModel.findByPk(id)
+      .then((sandwich) => {
+        if (sandwich != null) {
+          resolve(sandwich.get({ plain: true }))
+        } else {
+          reject(new Error('No se encontró el sandwich'))
+        }
+      })
+      .catch((error) => {
+        reject(error)
+      })
+  })
 }
 
-const obtenerListadoSandwichPorClasificacion = async (clasificacion: string): Promise<ISandwich[]> => {
-  return await SandwichModel.findAll({ where: { clasificacion } })
-    .then((sandwiches) => {
-      return sandwiches.map((el) => el.get({ plain: true }))
-    })
-    .catch((error) => {
-      throw error
-    })
+const obtenerListadoSandwichPorClasificacion = (clasificacion: string): Promise<ISandwich[]> => {
+  return new Promise<ISandwich[]>((resolve, reject) => {
+    SandwichModel.findAll({ where: { clasificacion } })
+      .then((sandwiches) => {
+        resolve(sandwiches.map((el) => el.get({ plain: true })))
+      })
+      .catch((error) => {
+        reject(error)
+      })
+  })
 }
 
 export { obtenerTodosLosSandwiches, agregarSandwich, obtenerPorId, obtenerListadoSandwichPorClasificacion }

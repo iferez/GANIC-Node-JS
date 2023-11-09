@@ -4,16 +4,20 @@ import express from 'express'
 import indexRouter from './routes/index.routes'
 import cors from 'cors'
 import morgan from 'morgan'
+// import apicache from 'apicache'
 
-const app = express()
 const port: string | undefined = process.env.PORT
-app.use(express.json())
-app.use('/static', express.static('public/images'))
+const app = express()
 app.use(morgan('dev'))
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
-app.use(cors({ origin: '*' }))
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:4200'],
+  methods: ['GET', 'POST']
+}))
 
 app.use('/api', indexRouter)
+app.use('/static', express.static('public/images'))
 
 app.listen(port, () => { console.log(`Server is listening on port $ ${port}`) })
