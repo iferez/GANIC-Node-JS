@@ -35,8 +35,8 @@ const obtenerPorId = (id: number): Promise<ISandwich> => {
     })
 }
 
-const obtenerListadoSandwichPorClasificacion = (clasificacion: string): Promise<ISandwich[]> => {
-  return SandwichModel.findAll({ where: { clasificacion } })
+const obtenerListadoSandwichPorClasificacion = (clasificacionSeleccionado: string): Promise<ISandwich[]> => {
+  return SandwichModel.findAll({ where: { clasificacion: clasificacionSeleccionado } })
     .then((sandwiches) => sandwiches.map((el) => el.get({ plain: true })))
     .catch((error) => { throw new Error(error.message) })
 }
