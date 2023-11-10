@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { IProducto } from '../interfaces/productos';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +7,9 @@ import { environment } from 'src/environments/environment';
 export class CarritoService {
 
   private _carrito: IProducto[];
-  private myAppUrl: string;
-  private myApiUrl: string;
-  
 
   constructor(
-    private http: HttpClient
-  ) { 
-    this.myAppUrl = environment.endpoint;
-    this.myApiUrl = 'api/pago/';
+  ) {
     this._carrito = [];
   }
 
@@ -31,11 +22,11 @@ export class CarritoService {
   }
 
   public eliminarDelCarrito(producto: IProducto): void {
-    this._carrito = this._carrito.filter( item => item.id !== producto.id);
+    this._carrito = this._carrito.filter(item => item.id !== producto.id);
   }
 
   public obtenerMonto(): number {
-    return this._carrito.reduce( (total, item) => total + item.precio, 0);
+    return this._carrito.reduce((total, item) => total + item.precio, 0);
   }
 
   public vaciarCarrito(): void {
