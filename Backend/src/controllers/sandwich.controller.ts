@@ -55,17 +55,17 @@ const obtenerSandwichPorId = (req: Request, res: Response): Promise<Response> =>
 }
 
 const obtenerListadoSandwichPorClasificacion = (req: Request, res: Response): Promise<Response> => {
-  return validacionSandwich.obtenerListadoSandwichPorClasificacionSchema.parseAsync(req.body)
+  return validacionSandwich
+    .obtenerListadoSandwichPorClasificacionSchema.parseAsync(req.body)
     .then((validarPreferencia) => {
-      const sandwich = sandwichService.obtenerListadoSandwichPorClasificacion(validarPreferencia.clasificacion)
+      return sandwichService.obtenerListadoSandwichPorClasificacion(validarPreferencia.clasificacion)
+    })
+    .then((sandwich) => {
       if (Object.keys(sandwich).length !== 0) {
         return res.json(sandwich)
       } else {
         return res.status(400).json({ mensaje: 'No existen sándwich para esa clasificación' })
       }
-    })
-    .catch((_error) => {
-      return res.status(400).json({ error: 'Datos de solicitud no válidos' })
     })
     .catch((_error) => {
       return res.status(500).json({ error: 'Error interno del servidor' })
