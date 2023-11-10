@@ -2,6 +2,7 @@
 import { IUsuario, IUsuarioInput } from '../interfaces/IUsuario'
 import UsuarioModel from '../models/usuario.model'
 
+UsuarioModel.sync()
 const obtenerUsuarios = (): Promise<IUsuario[]> => {
   return UsuarioModel.findAll()
     .then((usuarios) => usuarios.map((el) => el.get({ plain: true })))

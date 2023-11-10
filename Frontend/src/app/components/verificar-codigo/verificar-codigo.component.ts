@@ -24,17 +24,15 @@ export class VerificarCodigoComponent {
   }
 
   verificarCodigo(){
-    console.log('DATOS OBTENIDOS DEL FORM ==> ',this.form);
     const datosEnviar = {
       email: localStorage.getItem('email'),
       codigo: this.form.get('codigo')?.value
     }
     this._usuarioService.verificarCodigo(datosEnviar).subscribe({
-      next: (data) =>{
+      next: (_data) =>{
         this.Toast.success('Codigo verificado correctamente', 'Codigo verificado');
-        localStorage.setItem('token', data.token);
         setTimeout(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/home']);
         }, 2000);
       },
       error: (error) =>{

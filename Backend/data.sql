@@ -1,5 +1,7 @@
-CREATE DATABASE `sandwich` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci */;
-
+DROP DATABASE nombreTabla;
+CREATE DATABASE nombreTabla;
+use nombreTabla;
+ 
 CREATE TABLE `sandwich` (
   `id` double NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
@@ -9,7 +11,7 @@ CREATE TABLE `sandwich` (
   `imagen` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
+ 
 CREATE TABLE `usuario` (
   `id` double NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
@@ -21,6 +23,3 @@ CREATE TABLE `usuario` (
   `rol` enum('Administrador','Cliente') DEFAULT 'Cliente',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
-INSERT INTO sandwich.sandwich (nombre, descripcion, precio, clasificacion, imagen) VALUES('', NULL, NULL, 'Clásico', NULL);
-INSERT INTO sandwich.usuario (nombre, apellido, direccion, email, username, password, rol) VALUES('', NULL, NULL, '', '', '', 'Cliente');

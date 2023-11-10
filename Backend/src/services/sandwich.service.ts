@@ -2,6 +2,8 @@
 import { ISandwich, SandwichInput } from '../interfaces/ISandwitch'
 import SandwichModel from '../models/sandwich.model'
 
+
+SandwichModel.sync();
 const obtenerTodosLosSandwiches = (): Promise<ISandwich[]> => {
   return SandwichModel.findAll({})
     .then((sandwiches) => sandwiches.map((el) => el.get({ plain: true })))
