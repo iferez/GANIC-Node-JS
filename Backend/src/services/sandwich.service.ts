@@ -1,27 +1,19 @@
+/* eslint-disable @typescript-eslint/promise-function-async */
 import { ISandwich, SandwichInput } from '../interfaces/ISandwitch'
 import SandwichModel from '../models/sandwich.model'
 
-const obtenerTodosLosSandwiches = async (): Promise<ISandwich[]> => {
-  return await SandwichModel.sync()
-    .then(async () => {
-      return await SandwichModel.findAll({})
-    })
-    .then((sandwiches) => {
-      return sandwiches.map((el) => el.get({ plain: true }))
-    })
-    .catch((error) => {
-      console.log(error)
-      throw error
+const obtenerTodosLosSandwiches = (): Promise<ISandwich[]> => {
+  return SandwichModel.findAll({})
+    .then((sandwiches) => sandwiches.map((el) => el.get({ plain: true })))
+    .catch((_error) => {
+      throw new Error('Error al obtener los sandwiches')
     })
 }
 
-const agregarSandwich = async (sandwitchInput: SandwichInput): Promise<ISandwich> => {
-  return await SandwichModel.create(sandwitchInput)
-    .then(sandwich => {
-      return sandwich.get({ plain: true })
-    })
-    .catch(error => {
-      console.log(error)
+const agregarSandwich = (sandwitchInput: SandwichInput): Promise<ISandwich> => {
+  return SandwichModel.create(sandwitchInput)
+    .then((sandwich) => sandwich.get({ plain: true }))
+    .catch((error) => {
       if (error.name === 'SequelizeUniqueConstraintError') {
         throw new Error('El sandwich ya existe')
       } else {
@@ -30,22 +22,23 @@ const agregarSandwich = async (sandwitchInput: SandwichInput): Promise<ISandwich
     })
 }
 
-const obtenerPorId = async (id: number): Promise<ISandwich> => {
-  const sandwich = await SandwichModel.findByPk(id)
-  if (sandwich === null) {
-    throw new Error('El sandwich no fue encontrado')
-  }
-  return sandwich.get({ plain: true })
-}
-
-const obtenerListadoSandwichPorClasificacion = async (clasificacion: string): Promise<ISandwich[]> => {
-  return await SandwichModel.findAll({ where: { clasificacion } })
-    .then((sandwiches) => {
-      return sandwiches.map((el) => el.get({ plain: true }))
+const obtenerPorId = (id: number): Promise<ISandwich> => {
+  return SandwichModel.findByPk(id)
+    .then((sandwich) => {
+      if (sandwich == null) {
+        throw new Error('No se encontró el sandwich')
+      }
+      return sandwich.get({ plain: true })
     })
     .catch((error) => {
-      throw error
+      throw new Error(error.message)
     })
+}
+
+const obtenerListadoSandwichPorClasificacion = (clasificacion: string): Promise<ISandwich[]> => {
+  return SandwichModel.findAll({ where: { clasificacion } })
+    .then((sandwiches) => sandwiches.map((el) => el.get({ plain: true })))
+    .catch((error) => { throw new Error(error.message) })
 }
 
 export { obtenerTodosLosSandwiches, agregarSandwich, obtenerPorId, obtenerListadoSandwichPorClasificacion }

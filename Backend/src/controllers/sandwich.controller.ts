@@ -1,59 +1,75 @@
+/* eslint-disable @typescript-eslint/promise-function-async */
 import { Request, Response } from 'express'
 import * as sandwichService from '../services/sandwich.service'
 import { SandwichInput } from '../interfaces/ISandwitch'
 import * as validacionSandwich from '../validators/sandwich.validators'
 
-const obtenerSandwich = async (_req: Request, res: Response): Promise<Response> => {
-  try {
-    const sandwiches = await sandwichService.obtenerTodosLosSandwiches()
-    return res.status(200).json(sandwiches)
-  } catch (error) {
-    return res.status(500).json({ error: 'Error interno del servidor' })
-  }
+const obtenerSandwich = (_req: Request, res: Response): Promise<Response> => {
+  return sandwichService.obtenerTodosLosSandwiches()
+    .then((sandwiches) => {
+      return res.status(200).json(sandwiches)
+    })
+    .catch((_error) => {
+      return res.status(500).json({ error: 'Error interno del servidor' })
+    })
 }
 
-const agregarSandwich = async (req: Request, res: Response): Promise<Response> => {
-  try {
-    const datosValidos = validacionSandwich.agregarSandwitchSchema.parse(req.body)
+const agregarSandwich = (req: Request, res: Response): Promise<Response> => {
+  const datosValidos = validacionSandwich.agregarSandwitchSchema.parseAsync(req.body)
+  return datosValidos.then((datos) => {
     const imagen = req.file
-    if (imagen != null) {
-      const nuevoSandwich: SandwichInput = {
-        nombre: datosValidos.nombre,
-        precio: datosValidos.precio,
-        descripcion: datosValidos.descripcion,
-        clasificacion: datosValidos.clasificacion,
-        imagen: imagen.filename
+    if (imagen === undefined || imagen === null) {
+      return res.status(400).json({ error: 'No se envio una imágen' })
+    }
+    const nuevoSandwich: SandwichInput = {
+      nombre: datos.nombre,
+      precio: parseInt(datos.precio),
+      descripcion: datos.descripcion,
+      clasificacion: datos.clasificacion,
+      imagen: imagen.filename
+    }
+    return sandwichService.agregarSandwich(nuevoSandwich)
+      .then(() => res.status(201).json({ mensaje: 'Sándwich agregado correctamente' }))
+  }).catch((error) => {
+    return res.status(500).json({ error: error.message })
+  })
+}
+
+const obtenerSandwichPorId = (req: Request, res: Response): Promise<Response> => {
+  return validacionSandwich.obtenerSandwichPorIdSchema.parseAsync(req.query)
+    .then((validarId) => {
+      return sandwichService.obtenerPorId(validarId.id)
+        .then((sandwich) => {
+          if (sandwich === null) {
+            return res.status(404).json({ error: 'Sándwich no encontrado' })
+          }
+          return res.status(200).json(sandwich)
+        })
+        .catch((_error) => {
+          return res.status(500).json({ error: 'Error interno del servidor' })
+        })
+    })
+    .catch((_error) => {
+      return res.status(400).json({ error: 'Datos de solicitud no válidos' })
+    })
+}
+
+const obtenerListadoSandwichPorClasificacion = (req: Request, res: Response): Promise<Response> => {
+  return validacionSandwich.obtenerListadoSandwichPorClasificacionSchema.parseAsync(req.body)
+    .then((validarPreferencia) => {
+      const sandwich = sandwichService.obtenerListadoSandwichPorClasificacion(validarPreferencia.clasificacion)
+      if (Object.keys(sandwich).length !== 0) {
+        return res.json(sandwich)
+      } else {
+        return res.status(400).json({ mensaje: 'No existen sándwich para esa clasificación' })
       }
-      await sandwichService.agregarSandwich(nuevoSandwich)
-      return res.status(201).json(req.body)
-    }
-    return res.status(400).json({ error: 'No se ha proporcionado una imagen' })
-  } catch (error) {
-    return res.status(500).json({ error: 'Error interno del servidor' })
-  }
-}
-
-const obtenerSandwichPorId = async (req: Request, res: Response): Promise<Response> => {
-  try {
-    const validarId = validacionSandwich.obtenerSandwichPorIdSchema.parse(req.query)
-    const sandwich = await sandwichService.obtenerPorId(validarId.id)
-    if (sandwich == null) {
-      return res.status(404).json({ error: 'Sándwich no encontrado' })
-    }
-    return res.status(200).json(sandwich)
-  } catch (error) {
-    return res.status(500).json({ error: 'Error interno del servidor' })
-  }
-}
-
-const obtenerListadoSandwichPorClasificacion = async (req: Request, res: Response): Promise<Response> => {
-  try {
-    const validarPreferencia = validacionSandwich.obtenerListadoSandwichPorClasificacionSchema.parse(req.body)
-    const sandwich = sandwichService.obtenerListadoSandwichPorClasificacion(validarPreferencia.clasificacion)
-    return Object.keys(sandwich).length !== 0 ? res.json(sandwich) : res.status(400).json({ mensaje: 'No existen sandwitch para esa clasificación' })
-  } catch (error) {
-    return res.status(500).json({ error: 'Error interno del servidor' })
-  }
+    })
+    .catch((_error) => {
+      return res.status(400).json({ error: 'Datos de solicitud no válidos' })
+    })
+    .catch((_error) => {
+      return res.status(500).json({ error: 'Error interno del servidor' })
+    })
 }
 
 export { obtenerSandwich, agregarSandwich, obtenerSandwichPorId, obtenerListadoSandwichPorClasificacion }

@@ -24,6 +24,10 @@ SandwichModel.init(
     clasificacion: {
       type: DataTypes.ENUM('Clásico', 'Vegetariano', 'Vegano', 'Especial'),
       defaultValue: 'Clásico'
+    },
+    imagen: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   },
   {
