@@ -6,6 +6,8 @@ import { authGuard } from './guards/auth.guard';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { VerificarCodigoComponent } from './components/verificar-codigo/verificar-codigo.component';
+import { IngesarSandwichComponent } from './components/ingesar-sandwich/ingesar-sandwich.component';
+import { ListarProductosComponent } from './components/listar-productos/listar-productos.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full"},
@@ -20,10 +22,15 @@ const routes: Routes = [
   },
   { path: "crearPedido",
     canActivate: [authGuard],
-    component: HomeComponent
+    component: ListarProductosComponent
   },
   { path: "verificarCodigo",
     component: VerificarCodigoComponent
+  },
+  {
+    path: "agregarProducto",
+    canActivate: [authGuard],
+    component: IngesarSandwichComponent
   },
   { path: "**", redirectTo: "home", pathMatch: "full"}
 ];

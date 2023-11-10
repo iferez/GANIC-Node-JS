@@ -6,3 +6,5 @@ export interface IProducto{
     imagen: string;
     clasificacion: string;
 }
+
+export type IProductoCreado = Omit<IProducto, 'id' | 'imagen'>;

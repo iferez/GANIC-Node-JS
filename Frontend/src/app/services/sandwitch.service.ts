@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IProducto } from '../interfaces/productos';
+import { IProducto, IProductoCreado } from '../interfaces/productos';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +17,25 @@ export class SandwitchService {
     this.myApiUrl = 'api/sandwich/';
    }
 
-  getSandwitchesPreferencia(preferencia: string): Observable<IProducto[]> {
+  obtenerSandwichesPreferencia(preferencia: string): Observable<IProducto[]> {
       return this.http.post<IProducto[]>(`${this.myAppUrl}${this.myApiUrl}obtenerSandwitchPorClasificacion`, { "clasificacion": preferencia}, { headers: { 'Content-Type': 'application/json' }});
   }
 
-  getSandwitches(): Observable<IProducto[]> {
+  obtenerSandwiches(): Observable<IProducto[]> {
     return this.http.get<IProducto[]>(`${this.myAppUrl}${this.myApiUrl}listarSandwitch`);
+  }
+
+  crearSandwich(sandwichData: { producto: IProductoCreado, imagen: FormData }): Observable<string> {
+    const formData = new FormData();
+    formData.append('nombre', sandwichData.producto.nombre);
+    formData.append('precio', sandwichData.producto.precio.toString());
+    formData.append('descripcion', sandwichData.producto.descripcion);
+    formData.append('clasificacion', sandwichData.producto.clasificacion);
+    const imagen = sandwichData.imagen.get('imagen');
+    if (imagen) {
+      formData.append('imagen', imagen);
+    }
+    
+    return this.http.post<string>(`${this.myAppUrl}${this.myApiUrl}crearSandwitch`, formData);
   }
 }

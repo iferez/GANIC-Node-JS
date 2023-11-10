@@ -17,6 +17,9 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { VerificarCodigoComponent } from './components/verificar-codigo/verificar-codigo.component';
+import { IngesarSandwichComponent } from './components/ingesar-sandwich/ingesar-sandwich.component';
+import { ListarProductosComponent } from './components/listar-productos/listar-productos.component';
+import { SandwichComponent } from './components/sandwich/sandwich.component';
 
 
 @NgModule({
@@ -29,6 +32,9 @@ import { VerificarCodigoComponent } from './components/verificar-codigo/verifica
     RegistroComponent,
     SliderComponent,
     VerificarCodigoComponent,
+    IngesarSandwichComponent,
+    ListarProductosComponent,
+    SandwichComponent,
   ],
   imports: [
     BrowserModule,
