@@ -1,13 +1,25 @@
-<div class="card-body">
-    <div *ngFor="let item of listaCarrito">
-        <img src="http://localhost:3000/static/{{ item.imagen }}" alt="{{item.nombre}}">
-        <p class="card-text fw-bold">Producto: <span class="fw-normal">{{item.nombre}}</span></p>
-        <p class="card-text fw-bold">Descripción: <span class="fw-normal">{{item.descripcion}}</span></p>
-        <p class="card-text">Precio: <span class="fw-bold ps-5">{{item.precio}}</span></p>
-        <hr class="my-3" />
-        <button class="btn btn-danger" (click)="this.eliminarDelCarrito(item)">Eliminar producto</button>
+<div class="container py-5">
+
+    <div *ngFor="let prod of listaCarrito" class="card text-bg-dark mb-3" style="width: 100%">
+        <div class="row g-0">
+            <div class="col-md-6">
+                <img class="img-fluid" src="http://localhost:3000/static/{{ prod.imagen }}" alt="Product image">
+            </div>
+            <div class="col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title">{{ prod.nombre }}</h5>
+                    <p class="card-text">{{ prod.descripcion }}</p>
+                    <p class="card-text"><b>Precio:</b> ${{ prod.precio }}</p>
+                    <hr class="my-3" />
+                    <button class="btn btn-danger" (click)="this.eliminarDelCarrito(prod)"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-end">
+        <h5 class="my-3">Monto Total: <span class="ps-5">${{this.obtenerMonto()}}</span></h5>
+        <button class="btn btn-danger px-5" (click)="this.varciarCarrito()">Vaciar carrito</button>
+        <button class="btn btn-success px-5 ms-3">Ir a pagar</button>
     </div>
 </div>
-<p>Monto Total: <span class="ps-5">{{this.obtenerMonto()}}</span></p>
-
-<button class="btn btn-danger" (click)="this.varciarCarrito()">Vaciar carrito</button>

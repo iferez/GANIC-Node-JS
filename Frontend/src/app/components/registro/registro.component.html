@@ -1,16 +1,16 @@
 <div class="container">
     <div id="loginbox">
         <div class="row justify-content-center">
-            <div class="col-6 mt-5" style="background-color: #f7f7f7; padding: 46px;">
+            <div class="col-6 my-5" style="background-color: #030303; padding: 46px;">
                 <form [formGroup]="form" (ngSubmit)="registrarUsuario()">
-                    <h3>Bienvenido! ingresá tus datos</h3>
+                    <h3>Ingresá tus datos</h3>
                     <hr class="mb-4">
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
                             <i class="bi bi-person-circle" [class.green-icon]="this.form.get('nombre')?.valid"
                                 [class.red-icon]="this.form.get('nombre')?.invalid && this.form.get('nombre')?.touched"></i>
                         </span>
-                        <input formControlName="nombre" type="text" class="form-control" placeholder="Ingrese Nombre" />
+                        <input formControlName="nombre" type="text" class="form-control" placeholder="Nombre" />
                     </div>
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
@@ -18,7 +18,7 @@
                                 [class.red-icon]="this.form.get('apellido')?.invalid && this.form.get('apellido')?.touched"></i>
                         </span>
                         <input formControlName="apellido" type="text" class="form-control"
-                            placeholder="Ingrese Apellido" />
+                            placeholder="Apellido" />
                     </div>
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
@@ -26,21 +26,21 @@
                                 [class.red-icon]="this.form.get('direccion')?.invalid && this.form.get('direccion')?.touched"></i>
                         </span>
                         <input formControlName="direccion" type="text" class="form-control"
-                            placeholder="Ingrese Dirección" />
+                            placeholder="Dirección" />
                     </div>
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
                             <i class="bi bi-envelope" [class.green-icon]="this.form.get('email')?.valid"
                                 [class.red-icon]="this.form.get('email')?.invalid && this.form.get('email')?.touched"></i>
                         </span>
-                        <input formControlName="email" type="email" class="form-control" placeholder="Ingrese correo" />
+                        <input formControlName="email" type="email" class="form-control" placeholder="Correo" />
                     </div>
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
                             <i class="bi bi-person-circle" [class.green-icon]="this.form.get('user')?.valid"
                                 [class.red-icon]="this.form.get('user')?.invalid && this.form.get('user')?.touched"></i>
                         </span>
-                        <input formControlName="user" type="text" class="form-control" placeholder="Ingrese usuario" />
+                        <input formControlName="user" type="text" class="form-control" placeholder="Usuario" />
                     </div>
                     <div class="input-group input-group-lg">
                         <span class="input-group-text">
@@ -48,7 +48,7 @@
                                 [class.red-icon]="this.form.get('pass')?.invalid && this.form.get('pass')?.touched"></i>
                         </span>
                         <input formControlName="pass" type="password" class="form-control"
-                            placeholder="Ingrese password" />
+                            placeholder="Password" />
                     </div>
                     <div class="input-group input-group-lg mt-3">
                         <span class="input-group-text">
@@ -56,7 +56,7 @@
                                 [class.red-icon]="this.form.get('rePass')?.invalid && this.form.get('rePass')?.touched"></i>
                         </span>
                         <input formControlName="rePass" type="password" class="form-control"
-                            placeholder="Ingrese password nuevamente" />
+                            placeholder="Password nuevamente" />
                     </div>
                     <div class="d-grid">
                         <button [disabled]="this.form.invalid" class="btn btn-success mt-3 mb-4"
