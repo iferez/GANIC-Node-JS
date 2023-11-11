@@ -36,4 +36,8 @@ export class CarritoService {
   public vaciarCarrito(): void {
     this._carrito = [];
   }
+
+  public obtenerCantidadElementos(): number {
+    return this._carrito.length;
+  }
 }
