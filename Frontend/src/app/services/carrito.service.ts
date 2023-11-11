@@ -22,11 +22,15 @@ export class CarritoService {
   }
 
   public eliminarDelCarrito(producto: IProducto): void {
-    this._carrito = this._carrito.filter(item => item.id !== producto.id);
+    const index = this._carrito.findIndex(item => item.id === producto.id);
+  
+    if (index !== -1) {
+      this._carrito.splice(index, 1);
+    }
   }
 
   public obtenerMonto(): number {
-    return this._carrito.reduce((total, item) => total + item.precio, 0);
+    return this._carrito.reduce((total, item) => total + Number(item.precio), 0);
   }
 
   public vaciarCarrito(): void {

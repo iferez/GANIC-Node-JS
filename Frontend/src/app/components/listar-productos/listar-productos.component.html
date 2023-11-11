@@ -16,9 +16,10 @@
             <app-sandwich class="col-md-6" *ngFor="let prod of listaSandwitches" [prod]="prod"></app-sandwich>
         </div>
         <a routerLink="/home" class="btn btn-primary px-5 my-5">Volver al Home</a>
-        <a routerLink="/confirmar" class="btn btn-success px-5 my-5"> Ver Pedido
-            <span class="badge bg-secondary ms-2">{{this.obtenerLongitudCarrito()}}</span>
-        </a>
+        <a *ngIf="obtenerLongitudCarrito() > 0" routerLink="/verCarrito" class="btn btn-success px-5 my-5">
+            Ver Pedido
+            <span class="badge bg-secondary ms-2">{{ this.obtenerLongitudCarrito() }}</span>
+          </a>
 
     </div>
 </section>

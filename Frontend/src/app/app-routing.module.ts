@@ -8,6 +8,8 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { VerificarCodigoComponent } from './components/verificar-codigo/verificar-codigo.component';
 import { IngesarSandwichComponent } from './components/ingesar-sandwich/ingesar-sandwich.component';
 import { ListarProductosComponent } from './components/listar-productos/listar-productos.component';
+import { VercarritoComponent } from './components/vercarrito/vercarrito.component';
+import { carritoConElementosGuard } from './guards/carrito-con-elementos.guard';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full"},
@@ -31,6 +33,11 @@ const routes: Routes = [
     path: "agregarProducto",
     canActivate: [authGuard],
     component: IngesarSandwichComponent
+  },
+  {
+    path: "verCarrito",
+    canActivate: [authGuard, carritoConElementosGuard],
+    component: VercarritoComponent
   },
   { path: "**", redirectTo: "home", pathMatch: "full"}
 ];
