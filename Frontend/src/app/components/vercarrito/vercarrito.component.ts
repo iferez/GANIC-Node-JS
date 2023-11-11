@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IProducto } from 'src/app/interfaces/productos';
 import { CarritoService } from 'src/app/services/carrito.service';
 
@@ -11,7 +12,11 @@ import { CarritoService } from 'src/app/services/carrito.service';
 export class VercarritoComponent {
   listaCarrito: IProducto[];
 
-  constructor(private carritoService: CarritoService, private router: Router) {
+  constructor(
+    private carritoService: CarritoService,
+    private router: Router,
+    private Toastr: ToastrService,
+  ) {
     this.listaCarrito = [];
   }
 
@@ -21,8 +26,7 @@ export class VercarritoComponent {
   }
 
   obtenerMonto(): number {
-    let monto = Number(this.carritoService.obtenerMonto());
-    return monto;
+    return Number(this.carritoService.obtenerMonto());
   }
 
   eliminarDelCarrito(producto: IProducto): void {
@@ -32,8 +36,13 @@ export class VercarritoComponent {
 
   varciarCarrito(): void {
     this.carritoService.vaciarCarrito();
-    this.listaCarrito = [];
+    
+    this.Toastr.success('Carrito vaciado', 'Carrito vaciado');
     this.router.navigate(['/home']);
+  }
+
+  obtenerCantidadElementos(): number {
+    return this.carritoService.obtenerCantidadElementos();
   }
 
 }

@@ -11,7 +11,7 @@
                     <p class="card-text">{{ prod.descripcion }}</p>
                     <p class="card-text"><b>Precio:</b> ${{ prod.precio }}</p>
                     <hr class="my-3" />
-                    <button class="btn btn-danger" (click)="this.eliminarDelCarrito(prod)"><i class="bi bi-trash"></i></button>
+                    <button [disabled]="this.obtenerCantidadElementos() === 1" class="btn btn-danger" (click)="this.eliminarDelCarrito(prod)"><i class="bi bi-trash"></i></button>
                 </div>
             </div>
         </div>
