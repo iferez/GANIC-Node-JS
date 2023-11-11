@@ -20,6 +20,7 @@ import { VerificarCodigoComponent } from './components/verificar-codigo/verifica
 import { IngesarSandwichComponent } from './components/ingesar-sandwich/ingesar-sandwich.component';
 import { ListarProductosComponent } from './components/listar-productos/listar-productos.component';
 import { SandwichComponent } from './components/sandwich/sandwich.component';
+import { VercarritoComponent } from './components/vercarrito/vercarrito.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { SandwichComponent } from './components/sandwich/sandwich.component';
     IngesarSandwichComponent,
     ListarProductosComponent,
     SandwichComponent,
+    VercarritoComponent,
   ],
   imports: [
     BrowserModule,
