@@ -6,20 +6,20 @@ const jwt = require('jsonwebtoken');
 export const autorizado = (req: Request, res: Response, next: NextFunction) => {
     const authorizationHeader = req.headers.authorization;
 
-    if (!authorizationHeader) {
-        return res.status(403).json({ message: 'Token de autorización no proporcionado' });
+    if (authorizationHeader === undefined) {
+     return  res.status(401).json({ message: 'Token de autorización no proporcionado' });
     }
 
+    // @ts-ignore
     const token = authorizationHeader.split(' ')[1];
 
     // @ts-ignore
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
-            return res.status(401).json({ message: 'Token no válido' });
+            res.status(401).json({ message: 'Token no válido' });
         }
 
-        const rol = decoded?.rol;
-
+        const rol = decoded['rol'];
         if (!rol) {
             return res.status(401).json({ message: 'Rol no especificado en el token' });
         }

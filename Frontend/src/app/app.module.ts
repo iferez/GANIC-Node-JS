@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Angular Modulos
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -21,6 +21,7 @@ import { IngesarSandwichComponent } from './components/ingesar-sandwich/ingesar-
 import { ListarProductosComponent } from './components/listar-productos/listar-productos.component';
 import { SandwichComponent } from './components/sandwich/sandwich.component';
 import { VercarritoComponent } from './components/vercarrito/vercarrito.component';
+import {AgregarTokenInterceptor} from "./utils/agregar-token.interceptor";
 
 
 @NgModule({
@@ -46,7 +47,7 @@ import { VercarritoComponent } from './components/vercarrito/vercarrito.componen
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AgregarTokenInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

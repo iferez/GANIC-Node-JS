@@ -6,7 +6,7 @@ import {autorizado} from "../middleware/auth.usuario.middleware";
 
 const router = Router()
 
-router.get('/listarSandwitch', obtenerSandwich)
+router.get('/listarSandwitch',obtenerSandwich)
 
 router.get('/obtenerSandwitch', obtenerSandwichPorId)
 
