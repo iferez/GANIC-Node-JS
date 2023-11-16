@@ -9,7 +9,7 @@ export const autorizado = (req: Request, res: Response, next: NextFunction): voi
     try {
       const token = authorizationHeader.split(' ')[1] // Bearer <token>
       const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as IToken
-      if (decoded.rol !== 'Cliente') {
+      if (decoded.rol !== 'Administrador') {
         res.status(401).json({ message: 'No permitido el acceso' })
       } else {
         next()
