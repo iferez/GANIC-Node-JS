@@ -12,6 +12,7 @@ const dbDialect = process.env.DB_DIALECT ?? 'mysql' // Puedes cambiar 'mysql' po
 const dbConexion = new Sequelize(dbName, dbUser, dbPassword, {
   host: dbHost,
   dialect: dbDialect as 'mysql', // Asegura que el dialecto sea del tipo correcto
+  logging: false,
   port: dbPort
 })
 
