@@ -5,6 +5,9 @@ export interface IUsuario{
     username: string;
     password: string;
     direccion: string;
+    rol?: string;
 }
 
-export type IUsuarioLogin = Omit<IUsuario, 'id' | 'nombre' | 'apellido' | 'direccion' | 'username'>;
+export type IUsuarioLogin = Pick<IUsuario, 'email' | 'password'>;
+
+export type IToken = Pick<IUsuario, 'email' | 'rol'>;

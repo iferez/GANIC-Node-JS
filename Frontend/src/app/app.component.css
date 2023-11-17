@@ -1,5 +1,12 @@
+html{
+    scroll-behavior: smooth;
+}
+
 main{
-    background-color: #26262c;
-    color: #fff;
+    /*background-color: #26262c;
+    color: #fff;*/
+    background-color: Canvas;
+    color: CanvasText;
+    color-scheme: dark light;
     min-height: calc(100vh - 200px) !important;
 }

@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
+import { AgregarTokenInterceptor } from "./utils/agregar-token.interceptor";
 
 // Componentes
 import { AppComponent } from './app.component';
@@ -21,7 +22,8 @@ import { IngesarSandwichComponent } from './components/ingesar-sandwich/ingesar-
 import { ListarProductosComponent } from './components/listar-productos/listar-productos.component';
 import { SandwichComponent } from './components/sandwich/sandwich.component';
 import { VercarritoComponent } from './components/vercarrito/vercarrito.component';
-import {AgregarTokenInterceptor} from "./utils/agregar-token.interceptor";
+import { OlvidarContraseniaComponent } from './components/olvidar-contrasenia/olvidar-contrasenia.component';
+import { RestablecerContraseniaComponent } from './components/restablecer-contrasenia/restablecer-contrasenia.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import {AgregarTokenInterceptor} from "./utils/agregar-token.interceptor";
     ListarProductosComponent,
     SandwichComponent,
     VercarritoComponent,
+    OlvidarContraseniaComponent,
+    RestablecerContraseniaComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,9 +49,14 @@ import {AgregarTokenInterceptor} from "./utils/agregar-token.interceptor";
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true,
+    })
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AgregarTokenInterceptor, multi: true}],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AgregarTokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,7 +11,6 @@ export class UsuarioService {
 
   private myAppUrl: string;
   private myApiUrl: string;
-  private islogged: boolean = false;
 
   constructor( private http: HttpClient) { 
     this.myAppUrl = environment.endpoint;
@@ -24,6 +23,14 @@ export class UsuarioService {
 
   login(usuario: IUsuarioLogin): Observable<any> {
     return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}logearUsuario`, usuario);
+  }
+
+  olvidarContrasenia(email: string): Observable<any> {
+    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}olvidarContrasenia`, {params: {email}});
+  }
+
+  restablecerContrasenia(datos: any): Observable<any> {
+    return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}restablecerContrasenia`, datos);
   }
 
   verificarCodigo(datos: any): Observable<any> {

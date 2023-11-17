@@ -54,4 +54,16 @@ const olvidarContraseniaSchema = z.object({
     .min(8, 'El email debe tener al menos 8 caracteres')
 })
 
-export { obtenerUsuarioSchema, logearUsuarioSchema, verificarUsuarioSchema, agregarUsuarioSchema, olvidarContraseniaSchema }
+const restablecerContraseniaSchema = z.object({
+  email: z.string()
+    .email('El email es inválido')
+    .max(30, 'El email no puede tener más de 30 caracteres')
+    .min(8, 'El email debe tener al menos 8 caracteres'),
+  codigo: z.string()
+    .length(6, 'El código debe tener exactamente 6 caracteres'),
+  pass: z.string()
+    .length(8, 'El password debe tener exactamente 8 caracteres')
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, 'El password debe tener al menos una mayúscula, una minúscula y un número')
+})
+
+export { obtenerUsuarioSchema, logearUsuarioSchema, verificarUsuarioSchema, agregarUsuarioSchema, olvidarContraseniaSchema, restablecerContraseniaSchema }

@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
         }, 3000);
       },
       error: (error) =>{
-        console.log(error);
+        console.log(error.message);
         this.Toastr.error('Usuario o contraseña incorrectos', 'Error');
       },
       complete: () =>{
