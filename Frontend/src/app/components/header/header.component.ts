@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -7,15 +7,11 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   constructor( private _authService: AuthService,
     private _usuarioService: UsuarioService ) { 
     
-  }
-  ngOnInit(): void {
-    console.log('Dentro del Header Component')
-    console.log('HD: ' + this._usuarioService.isLogged());
   }
 
   isLogged(): boolean {
@@ -24,6 +20,10 @@ export class HeaderComponent implements OnInit {
 
   public salir(): void {
     this._authService.deslogar();
+  }
+
+  public isAdmin(): boolean {
+    return this._authService.isAdmin();
   }
 
 }

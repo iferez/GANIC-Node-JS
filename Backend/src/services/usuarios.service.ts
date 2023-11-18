@@ -2,8 +2,10 @@
 import { IUsuario, IUsuarioInput } from '../interfaces/IUsuario'
 import UsuarioModel from '../models/usuario.model'
 
-UsuarioModel.sync()
 const obtenerUsuarios = (): Promise<IUsuario[]> => {
+  if (process.env.CREATE_TABLES === 'si') {
+    UsuarioModel.sync().catch((error) => { throw new Error(error.message) })
+  }
   return UsuarioModel.findAll()
     .then((usuarios) => usuarios.map((el) => el.get({ plain: true })))
     .catch((error) => {

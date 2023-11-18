@@ -22,7 +22,6 @@ export class VercarritoComponent {
 
   ngOnInit() {
     this.listaCarrito = this.carritoService.carrito;
-    console.log(this.listaCarrito);
   }
 
   obtenerMonto(): number {
@@ -36,9 +35,8 @@ export class VercarritoComponent {
 
   varciarCarrito(): void {
     this.carritoService.vaciarCarrito();
-    
     this.Toastr.success('Carrito vaciado', 'Carrito vaciado');
-    this.router.navigate(['/home']);
+    this.router.navigate(['/crearPedido']);
   }
 
   obtenerCantidadElementos(): number {

@@ -2,9 +2,10 @@
 import { ISandwich, SandwichInput } from '../interfaces/ISandwitch'
 import SandwichModel from '../models/sandwich.model'
 
-
-SandwichModel.sync();
 const obtenerTodosLosSandwiches = (): Promise<ISandwich[]> => {
+  if (process.env.CREATE_TABLES === 'si') {
+    SandwichModel.sync().catch((error) => { throw new Error(error.message) })
+  }
   return SandwichModel.findAll({})
     .then((sandwiches) => sandwiches.map((el) => el.get({ plain: true })))
     .catch((_error) => {

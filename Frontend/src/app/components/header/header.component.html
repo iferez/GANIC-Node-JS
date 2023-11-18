@@ -13,7 +13,7 @@
                         <li><a class="dropdown-item text-dark py-2" routerLink="/registrar">Registrar</a></li>
                     </div>
                     <ng-template #loggedBlock>
-                        <li><a class="dropdown-item text-dark py-2" routerLink="/agregarProducto">Agregar Producto</a> </li>
+                        <li *ngIf="this.isAdmin()"><a class="dropdown-item text-dark py-2" routerLink="/agregarProducto">Agregar Producto</a></li>
                         <li><a class="dropdown-item text-dark py-2" routerLink="/verCarrito">Ver carrito</a></li>
                         <li><a class="dropdown-item text-dark py-2" routerLink='/home' (click)="this.salir()">Salir</a></li>
                     </ng-template>

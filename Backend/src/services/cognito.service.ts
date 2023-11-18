@@ -22,8 +22,8 @@ const registrarUsuario = (usuarioCognito: IUsuarioCognito): Promise<any> => {
     })
   })
     .catch((error) => {
-      console.log(error)
-      throw error
+      console.log(error.message)
+      throw new Error(error.message)
     })
 }
 
@@ -47,8 +47,8 @@ const logearUsuario = (email: string, password: string): Promise<any> => {
       }
     })
   }).catch((error) => {
-    console.log(error)
-    throw error
+    console.log(error.message)
+    throw new Error(error.message)
   })
 }
 
@@ -67,8 +67,8 @@ const confirmarUsuario = (email: string, codigo: string): Promise<any> => {
       resolve(result?.toString() as string)
     })
   }).catch((error) => {
-    console.log(error)
-    throw error
+    console.log(error.message)
+    throw new Error(error.message)
   })
 }
 
@@ -79,15 +79,23 @@ const olvidarContrasenia = (email: string): Promise<any> => {
   })
   return new Promise<string>((resolve, reject) => {
     cognitoUser.forgotPassword({
-      onSuccess: (result) => {
-        console.log(result)
-        resolve(result.toString())
-      },
-      onFailure: (err) => {
-        reject(new Error(err.message))
-      }
+      onSuccess: (result) => resolve(result.toString()),
+      onFailure: (err) => reject(new Error(err.message))
     })
   })
 }
 
-export { registrarUsuario, logearUsuario, confirmarUsuario, olvidarContrasenia }
+const restablecerContrasenia = (email: string, codigo: string, password: string): Promise<any> => {
+  const cognitoUser = new AmazonCognitoIdentity.CognitoUser({
+    Username: email,
+    Pool: userPool
+  })
+  return new Promise<string>((resolve, reject) => {
+    cognitoUser.confirmPassword(codigo, password, {
+      onSuccess: (result) => resolve(result.toString()),
+      onFailure: (err) => reject(new Error(err.message))
+    })
+  })
+}
+
+export { registrarUsuario, logearUsuario, confirmarUsuario, olvidarContrasenia, restablecerContrasenia }

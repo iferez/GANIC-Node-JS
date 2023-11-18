@@ -5,6 +5,7 @@ import * as cognitoService from '../services/cognito.service'
 import { IUsuarioCognito } from '../interfaces/IUsuario'
 import * as validacionUsuario from '../validators/usuarios.validators'
 import * as AuthService from '../services/auth.service'
+import UsuarioModel from '../models/usuario.model'
 
 const listarUsuarios = (_req: Request, res: Response): Promise<Response> => {
   return usuarioService.obtenerUsuarios()
@@ -71,8 +72,25 @@ const olvidarContrasenia = (req: Request, res: Response): any => {
       .then((result) => res.status(200).json(result))
       .catch((error) => res.status(500).json({ error: error.message }))
   } catch (error: any) {
+    console.log(error)
     return res.status(500).json({ error: error.message })
   }
 }
 
-export { listarUsuarios, crearUsuarios, logearUsuarioPorEmailYPassword, verificarUsuario, olvidarContrasenia }
+const restablecerContrasenia = (req: Request, res: Response): any => {
+  try {
+    const datosValidos = validacionUsuario.restablecerContraseniaSchema.parse(req.body)
+    const { email, codigo, pass } = datosValidos
+
+    return cognitoService
+      .restablecerContrasenia(email, codigo, pass)
+      .then((result) => {
+        return UsuarioModel.update({ password: pass }, { where: { email } })
+          .then(() => res.status(200).json(result))
+      }).catch((error) => res.status(500).json({ error: error.message }))
+  } catch (error: any) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
+export { listarUsuarios, crearUsuarios, logearUsuarioPorEmailYPassword, verificarUsuario, olvidarContrasenia, restablecerContrasenia }

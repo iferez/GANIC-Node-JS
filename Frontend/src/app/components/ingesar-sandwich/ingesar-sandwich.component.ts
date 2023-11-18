@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IProductoCreado } from 'src/app/interfaces/productos';
 import { SandwitchService } from 'src/app/services/sandwitch.service';
@@ -33,6 +34,7 @@ export class IngesarSandwichComponent {
   }
 
   agregarSandwich(): void{
+    const router = inject(Router);
     const nuevoProducto: IProductoCreado = {
       nombre: this.form.get('nombre')?.value as string,
       precio: this.form.get('precio')?.value as number,
@@ -41,12 +43,20 @@ export class IngesarSandwichComponent {
     }
     const formData = new FormData();
     formData.append('imagen', this.selectedFile);
-    this._sandwitchService.crearSandwich({ producto: nuevoProducto, imagen: formData }).subscribe(data => {
-      console.log(data);
-      this.Toast.success('Producto creado correctamente', 'Producto creado');
-    }, (error: any) => {
-      console.log(error);
-      this.Toast.error('Error al crear el producto', 'Error');
+    this._sandwitchService.crearSandwich({ producto: nuevoProducto, imagen: formData }).subscribe({
+      next: _data => {
+        this.Toast.success('Producto creado correctamente, Redirigiendo ...', 'Producto creado');
+        setTimeout(() => {
+          router.navigate(['/home']);
+        }, 2000);
+      },
+      error: (error: any) => {
+        console.log(error?.mensaje);
+        this.Toast.error('Error al crear el producto', 'Error');
+      },
+      complete: () => {
+        console.log('Completado');
+      }
     });
   }
 
