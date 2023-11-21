@@ -12,6 +12,7 @@ import { VerificarCodigoComponent } from './components/verificar-codigo/verifica
 import { RestablecerContraseniaComponent } from './components/restablecer-contrasenia/restablecer-contrasenia.component';
 import { carroConElementosGuard } from './guards/carro-con-elementos.guard';
 import { verCarroGuard } from './guards/ver-carro.guard';
+import { ingresarSandwichGuard } from './guards/ingresar-sandwich.guard';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full"},
@@ -35,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: "agregarProducto",
-    canActivate: [authGuard],
+    canActivate: [authGuard, ingresarSandwichGuard],
     component: IngesarSandwichComponent
   },
   {

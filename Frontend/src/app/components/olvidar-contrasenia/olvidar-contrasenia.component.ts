@@ -28,7 +28,7 @@ export class OlvidarContraseniaComponent {
     const email = this.form.get('email')?.value;
     console.table(email);
     this._usuarioService.olvidarContrasenia(email).subscribe({
-      next: (data) =>{
+      next: (_data) =>{
         this.Toast.success('Se le envio un codigo para restablecer contraseña', 'Email enviado');
         setTimeout(() => {
           localStorage.setItem('email', email);

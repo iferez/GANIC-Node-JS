@@ -37,6 +37,10 @@ export class CarritoService {
     this._carrito = [];
   }
 
+  public mostrarCarrito(): void {
+    console.log(this._carrito);
+  }
+
   public obtenerCantidadElementos(): number {
     return this._carrito.length;
   }

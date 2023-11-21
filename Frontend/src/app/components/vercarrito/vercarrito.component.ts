@@ -43,4 +43,12 @@ export class VercarritoComponent {
     return this.carritoService.obtenerCantidadElementos();
   }
 
+  pagarCarrito(): void {
+    this.Toastr.success('Compra realizada con exito', 'Compra realizada');
+    setTimeout(() => {
+      this.carritoService.mostrarCarrito();
+      this.carritoService.vaciarCarrito();
+      this.router.navigate(['/home']);
+    }, 1000);
+  }
 }

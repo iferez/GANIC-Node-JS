@@ -48,14 +48,11 @@ export class IngesarSandwichComponent {
         this.Toast.success('Producto creado correctamente, Redirigiendo ...', 'Producto creado');
         setTimeout(() => {
           router.navigate(['/home']);
-        }, 2000);
+        }, 1000);
       },
       error: (error: any) => {
         console.log(error?.mensaje);
         this.Toast.error('Error al crear el producto', 'Error');
-      },
-      complete: () => {
-        console.log('Completado');
       }
     });
   }
