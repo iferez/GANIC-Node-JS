@@ -5,7 +5,6 @@ import * as cognitoService from '../services/cognito.service'
 import { IUsuarioCognito } from '../interfaces/IUsuario'
 import * as validacionUsuario from '../validators/usuarios.validators'
 import * as AuthService from '../services/auth.service'
-import UsuarioModel from '../models/usuario.model'
 
 const listarUsuarios = (_req: Request, res: Response): Promise<Response> => {
   return usuarioService.obtenerUsuarios()
@@ -85,8 +84,7 @@ const restablecerContrasenia = (req: Request, res: Response): any => {
     return cognitoService
       .restablecerContrasenia(email, codigo, pass)
       .then((result) => {
-        return UsuarioModel.update({ password: pass }, { where: { email } })
-          .then(() => res.status(200).json(result))
+        return res.status(200).json(result)
       }).catch((error) => res.status(500).json({ error: error.message }))
   } catch (error: any) {
     return res.status(500).json({ error: error.message })

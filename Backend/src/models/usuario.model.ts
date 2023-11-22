@@ -30,10 +30,6 @@ UsuarioModel.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     rol: {
       type: DataTypes.ENUM('Administrador', 'Cliente'),
       defaultValue: 'Cliente'

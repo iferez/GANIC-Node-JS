@@ -18,7 +18,8 @@ export class IngesarSandwichComponent {
   constructor(
      private formBuilder: FormBuilder,
      private _sandwitchService: SandwitchService,
-     private Toast: ToastrService
+     private Toast: ToastrService,
+     private router: Router
   ) { 
     this.form = this.formBuilder.group({
       nombre: ['',[Validators.required, Validators.minLength(3)]],
@@ -34,7 +35,6 @@ export class IngesarSandwichComponent {
   }
 
   agregarSandwich(): void{
-    const router = inject(Router);
     const nuevoProducto: IProductoCreado = {
       nombre: this.form.get('nombre')?.value as string,
       precio: this.form.get('precio')?.value as number,
@@ -47,7 +47,7 @@ export class IngesarSandwichComponent {
       next: _data => {
         this.Toast.success('Producto creado correctamente, Redirigiendo ...', 'Producto creado');
         setTimeout(() => {
-          router.navigate(['/home']);
+          this.router.navigate(['/home']);
         }, 1000);
       },
       error: (error: any) => {
