@@ -24,6 +24,7 @@ import { SandwichComponent } from './components/sandwich/sandwich.component';
 import { VercarritoComponent } from './components/vercarrito/vercarrito.component';
 import { OlvidarContraseniaComponent } from './components/olvidar-contrasenia/olvidar-contrasenia.component';
 import { RestablecerContraseniaComponent } from './components/restablecer-contrasenia/restablecer-contrasenia.component';
+import { PagoComponent } from './components/pago/pago.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { RestablecerContraseniaComponent } from './components/restablecer-contra
     VercarritoComponent,
     OlvidarContraseniaComponent,
     RestablecerContraseniaComponent,
+    PagoComponent,
   ],
   imports: [
     BrowserModule,

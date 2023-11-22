@@ -13,6 +13,7 @@ import { RestablecerContraseniaComponent } from './components/restablecer-contra
 import { carroConElementosGuard } from './guards/carro-con-elementos.guard';
 import { verCarroGuard } from './guards/ver-carro.guard';
 import { ingresarSandwichGuard } from './guards/ingresar-sandwich.guard';
+import { PagoComponent } from './components/pago/pago.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full"},
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: "restablecer",
     component: OlvidarContraseniaComponent
+  },
+  {
+    path: "pagar",
+    component: PagoComponent
   },
   {
     path: "restablecerContrasenia",
