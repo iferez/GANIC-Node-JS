@@ -9,9 +9,6 @@ const obtenerPagoSchema = z.object({
     .int()
     .positive(),
   listaProductos: z.array(z.object({
-    id: z.number()
-      .int()
-      .positive(),
     nombre: z.string()
       .min(3)
       .max(100),

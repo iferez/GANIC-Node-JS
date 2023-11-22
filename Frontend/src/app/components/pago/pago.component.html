@@ -11,7 +11,7 @@
                                 [class.green-icon]="this.form.get('titular')?.valid"
                                 [class.red-icon]="this.form.get('titular')?.invalid && this.form.get('titular')?.touched"></i>
                             </span>
-                            <input [disabled] formControlName="titular" type="text" class="form-control" value="titular">
+                            <input formControlName="titular" type="text" class="form-control" value="titular">
                         </div>
                         <div class="input-group input-group-lg mb-3">
                             <span class="input-group-text">

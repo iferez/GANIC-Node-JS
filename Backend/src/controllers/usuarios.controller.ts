@@ -91,4 +91,18 @@ const restablecerContrasenia = (req: Request, res: Response): any => {
   }
 }
 
-export { listarUsuarios, crearUsuarios, logearUsuarioPorEmailYPassword, verificarUsuario, olvidarContrasenia, restablecerContrasenia }
+const obtenerUsuario = (req: Request, res: Response): any => {
+  try {
+    const datosValidos = validacionUsuario.obtenerUsuarioSchema.parse(req.query)
+    const email: string = datosValidos.email
+
+    return usuarioService
+      .obtenerUsuarioPorEmail(email)
+      .then((usuario) => res.status(200).json(usuario))
+      .catch((error) => res.status(500).json({ error: error.message }))
+  } catch (error: any) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
+export { listarUsuarios, crearUsuarios, logearUsuarioPorEmailYPassword, verificarUsuario, olvidarContrasenia, restablecerContrasenia, obtenerUsuario }

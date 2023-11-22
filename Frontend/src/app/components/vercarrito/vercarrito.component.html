@@ -21,6 +21,7 @@
     <div class="text-end">
         <h5 class="my-3">Monto Total: <span class="ps-5">${{this.obtenerMonto()}}</span></h5>
         <button class="btn btn-danger px-5" (click)="this.varciarCarrito()">Vaciar carrito</button>
-        <a [routerLink]="/pagar" class="btn btn-success">Pagar</a>
+        <a routerLink="/crearPedido" class="btn btn-primary">Seguir comprando</a>
+        <a routerLink="/pagar" class="btn btn-success">Pagar</a>
     </div>
 </div>

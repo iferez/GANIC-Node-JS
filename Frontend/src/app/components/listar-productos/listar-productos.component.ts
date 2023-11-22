@@ -14,7 +14,7 @@ import { SandwitchService } from 'src/app/services/sandwitch.service';
 export class ListarProductosComponent {
   isSubmitted = false;
   form: FormGroup;
-  Preferencias: string[] = ['Clásico', 'Vegetariano', 'Vegano', 'Especial'];
+  Preferencias: string[] = ['Todos', 'Clásico', 'Vegetariano', 'Vegano', 'Especial'];
   listaSandwitches: IProducto[] = [];
 
   constructor( 

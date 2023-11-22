@@ -51,6 +51,7 @@ const routes: Routes = [
   },
   {
     path: "pagar",
+    canActivate: [authGuard, verCarroGuard],
     component: PagoComponent
   },
   {

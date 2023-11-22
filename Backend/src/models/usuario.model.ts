@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize'
-import { dbConexion } from '../database/dbConexion'
+import { dbConexion } from '../config/dbConexion'
 
 class UsuarioModel extends Model {}
 

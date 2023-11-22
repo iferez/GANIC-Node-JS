@@ -1,9 +1,9 @@
 import * as z from 'zod'
 
 const obtenerUsuarioSchema = z.object({
-  q: z.string()
+  email: z.string()
     .min(3, 'El username debe tener al menos 3 caracteres')
-    .max(10, 'El username no puede tener más de 10 caracteres')
+    .max(30, 'El username no puede tener más de 10 caracteres')
 })
 
 const logearUsuarioSchema = z.object({

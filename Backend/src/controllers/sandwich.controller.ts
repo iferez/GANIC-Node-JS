@@ -58,7 +58,11 @@ const obtenerListadoSandwichPorClasificacion = (req: Request, res: Response): Pr
   return validacionSandwich
     .obtenerListadoSandwichPorClasificacionSchema.parseAsync(req.body)
     .then((validarPreferencia) => {
-      return sandwichService.obtenerListadoSandwichPorClasificacion(validarPreferencia.clasificacion)
+      if (validarPreferencia.clasificacion === 'Todos') {
+        return sandwichService.obtenerTodosLosSandwiches()
+      } else {
+        return sandwichService.obtenerListadoSandwichPorClasificacion(validarPreferencia.clasificacion)
+      }
     })
     .then((sandwich) => {
       if (Object.keys(sandwich).length !== 0) {
