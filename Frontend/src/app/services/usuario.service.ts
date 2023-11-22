@@ -44,4 +44,8 @@ export class UsuarioService {
   desloguear(): void {
     localStorage.removeItem('token');
   }
+
+  obtenerUsuario(email: string): Observable<IUsuario> {
+    return this.http.get<IUsuario>(`${this.myAppUrl}${this.myApiUrl}obtenerUsuario`,{params: {email}});
+  }
 }

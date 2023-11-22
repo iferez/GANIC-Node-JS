@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize'
-import { dbConexion } from '../database/dbConexion'
+import { dbConexion } from '../config/dbConexion'
 
 class UsuarioModel extends Model {}
 
@@ -27,10 +27,6 @@ UsuarioModel.init(
       allowNull: false
     },
     username: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    password: {
       type: DataTypes.STRING,
       allowNull: false
     },

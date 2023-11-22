@@ -12,6 +12,8 @@ import { VerificarCodigoComponent } from './components/verificar-codigo/verifica
 import { RestablecerContraseniaComponent } from './components/restablecer-contrasenia/restablecer-contrasenia.component';
 import { carroConElementosGuard } from './guards/carro-con-elementos.guard';
 import { verCarroGuard } from './guards/ver-carro.guard';
+import { ingresarSandwichGuard } from './guards/ingresar-sandwich.guard';
+import { PagoComponent } from './components/pago/pago.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full"},
@@ -35,7 +37,7 @@ const routes: Routes = [
   },
   {
     path: "agregarProducto",
-    canActivate: [authGuard],
+    canActivate: [authGuard, ingresarSandwichGuard],
     component: IngesarSandwichComponent
   },
   {
@@ -46,6 +48,11 @@ const routes: Routes = [
   {
     path: "restablecer",
     component: OlvidarContraseniaComponent
+  },
+  {
+    path: "pagar",
+    canActivate: [authGuard, verCarroGuard],
+    component: PagoComponent
   },
   {
     path: "restablecerContrasenia",

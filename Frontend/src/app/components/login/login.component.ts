@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
       next: (data) =>{
         this.Toastr.success('Validacion correcta', 'Validacion correcta');
         setTimeout(() => {
+          localStorage.setItem('email', usuario.email);
           localStorage.setItem('token', data.token);
           this.router.navigate(['/home']);
         }, 3000);
