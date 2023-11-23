@@ -2,7 +2,7 @@ import * as z from 'zod'
 
 const obtenerPagoSchema = z.object({
   email: z.string()
-    .email()
+    .email('El email es inválido')
     .min(3)
     .max(100),
   monto: z.number()
@@ -12,10 +12,7 @@ const obtenerPagoSchema = z.object({
     nombre: z.string()
       .min(3)
       .max(100),
-    precio: z.string(),
-    descripcion: z.string()
-      .min(10)
-      .max(100)
+    precio: z.string()
   }))
 })
 

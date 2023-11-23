@@ -8,4 +8,4 @@ export interface IProducto{
 }
 
 export type IProductoCreado = Omit<IProducto, 'id' | 'imagen'>;
-export type IProductoPago = Pick<IProducto, 'nombre' | 'descripcion' | 'precio'>;
+export type IProductoPago = Pick<IProducto, 'nombre' | 'precio'>;

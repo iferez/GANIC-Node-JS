@@ -2,11 +2,12 @@
 import { Request, Response } from 'express'
 import * as pagoValido from '../validators/pago.validators'
 import { enviarEmail } from '../services/email.service'
+import { ISandwichPago } from '../interfaces/ISandwitch'
 
 const pagarOrdenDePago = (req: Request, res: Response): Response => {
   try {
     const datosValidos = pagoValido.obtenerPagoSchema.parse(req.body)
-    console.table(datosValidos.listaProductos)
+    console.table(datosValidos.listaProductos as unknown as ISandwichPago[])
     enviarEmail({
       email: datosValidos.email,
       subject: 'Pago realizado correctamente',
@@ -34,7 +35,7 @@ const pagarOrdenDePago = (req: Request, res: Response): Response => {
                 )
                 .join('')}
                   <td colspan="2" style="padding: 8px; border: 1px solid #ddd; text-align: right;">Total:</td>
-                  <td style="padding: 8px; border: 1px solid #ddd;">$${datosValidos.monto}</td>
+                  <td style="padding: 8px; border: 1px solid #ddd;">$${+datosValidos.monto}</td>
               </tr>
           </tbody>
       </table>

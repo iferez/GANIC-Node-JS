@@ -21,10 +21,6 @@ const registrarUsuario = (usuarioCognito: IUsuarioCognito): Promise<any> => {
       resolve(result?.user.getUsername() as string)
     })
   })
-    .catch((error) => {
-      console.log(error.message)
-      throw new Error(error.message)
-    })
 }
 
 const logearUsuario = (email: string, password: string): Promise<any> => {
@@ -39,16 +35,9 @@ const logearUsuario = (email: string, password: string): Promise<any> => {
 
   return new Promise<string>((resolve, reject) => {
     cognitoUser.authenticateUser(authenticationDetails, {
-      onSuccess: (result) => {
-        resolve(result.getIdToken().getJwtToken())
-      },
-      onFailure: (err) => {
-        reject(new Error(err.message))
-      }
+      onSuccess: (result) => resolve(result.isValid() as unknown as string),
+      onFailure: (err) => reject(new Error(err.message))
     })
-  }).catch((error) => {
-    console.log(error.message)
-    throw new Error(error.message)
   })
 }
 
@@ -66,9 +55,6 @@ const confirmarUsuario = (email: string, codigo: string): Promise<any> => {
       }
       resolve(result?.toString() as string)
     })
-  }).catch((error) => {
-    console.log(error.message)
-    throw new Error(error.message)
   })
 }
 

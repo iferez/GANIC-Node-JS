@@ -8,3 +8,5 @@ export interface ISandwich {
 }
 
 export type SandwichInput = Omit<ISandwich, 'id'>
+
+export type ISandwichPago = Pick<ISandwich, 'nombre' | 'precio'>

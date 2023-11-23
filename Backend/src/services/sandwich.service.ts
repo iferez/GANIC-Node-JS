@@ -8,9 +8,7 @@ const obtenerTodosLosSandwiches = (): Promise<ISandwich[]> => {
   }
   return SandwichModel.findAll({})
     .then((sandwiches) => sandwiches.map((el) => el.get({ plain: true })))
-    .catch((_error) => {
-      throw new Error('Error al obtener los sandwiches')
-    })
+    .catch((_error) => { throw new Error('Error al obtener los sandwiches') })
 }
 
 const agregarSandwich = (sandwitchInput: SandwichInput): Promise<ISandwich> => {
@@ -33,9 +31,7 @@ const obtenerPorId = (id: number): Promise<ISandwich> => {
       }
       return sandwich.get({ plain: true })
     })
-    .catch((error) => {
-      throw new Error(error.message)
-    })
+    .catch((error) => { throw new Error(error.message) })
 }
 
 const obtenerListadoSandwichPorClasificacion = (clasificacionSeleccionado: string): Promise<ISandwich[]> => {

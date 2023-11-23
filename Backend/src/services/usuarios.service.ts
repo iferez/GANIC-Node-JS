@@ -8,19 +8,13 @@ const obtenerUsuarios = (): Promise<IUsuario[]> => {
   }
   return UsuarioModel.findAll()
     .then((usuarios) => usuarios.map((el) => el.get({ plain: true })))
-    .catch((error) => {
-      console.log(error)
-      throw error
-    })
+    .catch((error) => { throw new Error(error.message) })
 }
 
 const agregarUsuario = (usuario: IUsuarioInput): Promise<IUsuario> => {
   return UsuarioModel.create(usuario)
     .then((usuario) => usuario.get({ plain: true }))
-    .catch((error) => {
-      console.log(error)
-      throw error
-    })
+    .catch((error) => { throw new Error(error.message) })
 }
 
 const obtenerUsuarioPorEmail = (email: string): Promise<IUsuario> => {
@@ -31,32 +25,7 @@ const obtenerUsuarioPorEmail = (email: string): Promise<IUsuario> => {
       }
       return usuario.get({ plain: true })
     })
-    .catch((error) => {
-      console.log(error)
-      throw error
-    })
+    .catch((error) => { throw new Error(error.message) })
 }
 
-const logearUsuario = (email: string, pass: string): Promise<IUsuario> => {
-  let usuarioEncontrado: IUsuario
-
-  return UsuarioModel.findOne({ where: { email } })
-    .then((usuario) => {
-      if (usuario == null) {
-        throw new Error('El usuario no fue encontrado')
-      }
-      usuarioEncontrado = usuario.get({ plain: true })
-
-      if (usuarioEncontrado.password !== pass) {
-        throw new Error('La contraseña es incorrecta')
-      }
-
-      return usuarioEncontrado
-    })
-    .catch((error) => {
-      console.log(error)
-      throw error
-    })
-}
-
-export { obtenerUsuarioPorEmail, obtenerUsuarios, agregarUsuario, logearUsuario }
+export { obtenerUsuarioPorEmail, obtenerUsuarios, agregarUsuario }

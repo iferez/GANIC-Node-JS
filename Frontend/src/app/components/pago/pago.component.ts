@@ -47,7 +47,6 @@ export class PagoComponent {
       listaProductos: this._carritoService.carrito.map(item => {
           return {
             nombre: item.nombre,
-            descripcion: item.descripcion,
             precio: item.precio
           }
         })

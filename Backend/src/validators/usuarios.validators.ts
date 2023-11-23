@@ -4,6 +4,7 @@ const obtenerUsuarioSchema = z.object({
   email: z.string()
     .min(3, 'El username debe tener al menos 3 caracteres')
     .max(30, 'El username no puede tener más de 10 caracteres')
+    .email('El email es inválido')
 })
 
 const logearUsuarioSchema = z.object({
